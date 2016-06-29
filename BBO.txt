@@ -1,0 +1,10 @@
+Hello, Dr.Donyina
+
+My name is Han Wang, And I'm a transfer student from Olympic College
+at Bremerton, WA. My major is CSS.
+I like to do some teamwork with others,
+and I'm really enjoy to share something with other people.
+This is a binary calculater that what I did from my previous java
+class. It is not a difficult project, but it takes me a lot of time
+to proof the calculation. Thank you to take your time on my little
+project. 

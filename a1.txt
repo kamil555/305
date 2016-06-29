@@ -1,0 +1,178 @@
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import javax.sound.midi.InvalidMidiDataException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+/**
+ * 
+ * @author hw29
+ * @version v1.2
+ */
+
+@SuppressWarnings("serial")
+class BinaryCal extends JFrame implements ActionListener
+{
+    /**
+     * 
+     */
+    private Container myCanvas = this.getContentPane();
+    /**
+     * 
+     */
+    private final JTextField myInput;
+    /**
+     * 
+     */
+    private final JTextField myOutput;
+    /**
+     * 
+     */
+    private final JButton myB2click;
+    /**
+     * 
+     */
+    private final JButton myB10click;
+    /**
+     * 
+     */
+    private final JButton myClear;
+    /**
+     * 
+     */
+    private final int myF = 20;
+    /**
+     * 
+     */
+    private final int myG = 3;
+    /**
+     * 
+     */
+    private final int myH = 100;
+    /**
+     * 
+     */
+    private final int myI = 160;
+    /**
+     * 
+     */
+    private final int myJ = 400;
+    /**
+     * 
+     */
+    private final int myK = 520;
+    /**
+     * 
+     */
+    public BinaryCal() {
+        super();
+        myInput = new JTextField(myF);
+        myOutput = new JTextField(myF);
+        myOutput.setEditable(false);
+        final JPanel pnlPanle = new JPanel(new GridLayout(2 , 2 , myG , 1));
+        pnlPanle.add(wrapMeInAPanel(new JLabel("Iuput your number")));
+        pnlPanle.add(wrapMeInAPanel(myInput));
+        pnlPanle.add(wrapMeInAPanel(new JLabel("Output")));
+        pnlPanle.add(wrapMeInAPanel(myOutput));
+        /**
+         * * add panels
+         * */
+        getmyCanvas().add(pnlPanle, BorderLayout.CENTER);
+        myB2click = new JButton("Binary 2");
+        myB2click.addActionListener(this);
+        myB10click = new JButton("Base 10");
+        myB10click.addActionListener(this);
+        myClear = new JButton("Clear");
+        myClear.addActionListener(this);
+        /**
+         * 
+         */
+        final JPanel pnlSouth = new JPanel();
+        pnlSouth.add(myB2click);
+        pnlSouth.add(myB10click);
+        pnlSouth.add(myClear);
+        getmyCanvas().add(pnlSouth, BorderLayout.SOUTH);
+        this.setResizable(false);
+        this.setTitle("Binary Calculator");
+        this.setLocation(myJ, myH);
+        this.setSize(myK, myI);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }   
+    /**
+     * 
+     * @param theC -add to panel
+     * @return return and update JPanel
+     */
+    private JPanel wrapMeInAPanel(final Component theC) {
+        final JPanel panel = new JPanel();
+        panel.add(theC);
+        return panel;
+    }
+
+    /**
+     * @param theE ActionEvent for buttons
+     */
+
+    public void actionPerformed(final ActionEvent theE) {
+        /**
+         * 
+         */
+        if (theE.getSource() == myB2click) {
+            final String result = 
+                    Integer.toBinaryString(Integer.parseInt(myInput.getText()));
+            myOutput.setText(result);
+        }
+        
+        if (theE.getSource() == myB10click) {
+            try {
+                final String result = Integer.valueOf(myInput.getText(), 2).toString();
+                myOutput.setText(result); 
+            } catch (final Exception e) {
+                JOptionPane.showMessageDialog(null, "invalid input"); }
+        }
+
+        if (theE.getSource() == myClear) {
+            myInput.setText("");
+            myOutput.setText("");
+        }
+    }
+    /**
+     * 
+     * @return to myCanvas
+     *
+     */
+    public Container getmyCanvas() {
+        return myCanvas;
+    }
+    /**
+     * 
+     * @param theCanvas put to TestBinary
+     */
+    public void setmyCanvas(final Container theCanvas) {
+        this.myCanvas = theCanvas;
+    }
+    /**
+     * 
+     * @param theArgs ...
+     */
+    public static void main(final String[] theArgs) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                final ProPic frame = new ProPic();
+                frame.setVisible(true);
+            }
+        });
+    }
+}
